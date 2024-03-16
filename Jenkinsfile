@@ -29,7 +29,7 @@ pipeline {
             steps {
                 script {
                     // You can execute npmInstall() or any npm related commands here
-                    sh "npm install"
+                    sh "npm run start"
                     echo 'Running npmInstall...'
                 }
             }
@@ -41,17 +41,17 @@ pipeline {
 			    script
 			    {
                   withDockerRegistry([url: 'https://index.docker.io/v1/', credentialsId: 'Docker_id']){
-                        sh "docker build -t mahimarajput26/youtube_clone:${BUILD_NUMBER} ."
-				        sh "docker build -t mahimarajput26/youtube_clone:latest ."
-					    sh "docker push mahimarajput26/youtube_clone:${BUILD_NUMBER}"
-					    sh "docker push mahimarajput26/youtube_clone:latest"	
+                        sh "docker build -t mahimarajput26/youtube_clone2:${BUILD_NUMBER} ."
+				        sh "docker build -t mahimarajput26/youtube_clone2:latest ."
+					    sh "docker push mahimarajput26/youtube_clone2:${BUILD_NUMBER}"
+					    sh "docker push mahimarajput26/youtube_clone2:latest"	
 					}
 			    }
 			}
 		}
         stage('Deploy to container'){
             steps{
-                sh 'docker run -d --name youtube1 -p 3000:3000  mahimarajput26/youtube_clone:latest'
+                sh 'docker run -d --name youtube1 -p 3000:3000  mahimarajput26/youtube_clone2:latest'
             }
         }
     }
