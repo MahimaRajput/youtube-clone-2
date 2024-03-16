@@ -29,6 +29,7 @@ pipeline {
             steps {
                 script {
                     // You can execute npmInstall() or any npm related commands here
+                    sh "npm install react-scripts --save-dev"
                     sh "npm run start"
                     echo 'Running npmInstall...'
                 }
